@@ -1,0 +1,37 @@
+<h5>"{{reason}}" on {{format_date date_created}} from {{manager}}</h5>
+
+<button type="button" class="btn btn-primary open-modal-button" data-toggle="modal" data-target="#" data-index="{{@index}}">
+    View
+</button>
+<!-- Modals for each acknowledged writeup -->
+<div class="modal fade" id="WriteUp{{@index}}" tabindex="-1" role="dialog" aria-labelledby="writeUpModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header"> <!-- Modal-->
+                <div>
+                    <h5 class="modal-title" id="writeUpModalLabel">{{type}}: "{{reason}}" on {{format_date date_created}}</h5>
+                    <br>
+                    <p>This was a <b>{{type}}</b> for an event that occurred on: {{format_date date_created}}</p>
+                    <p><b>Infraction</b>: {{reason}}</p>
+                    <p><b>Created by</b>: {{manager}}</p>
+                    <p><b>Description of the event</b>: "{{content}}"</p>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                {{#each comments}} <!-- When we use each, we have now changed what .this refers to. It changes from writeup to comment writeups.comment-->
+                <div class="form-group">
+                    <label for="commentsTextarea">Commented by - {{this.user.username}}:</label>
+                    <p>"{{this.content}}"</p>
+                </div>
+                {{/each}}
+        
+            </div>
+            <div class="modal-footer"> <!-- Houses the button -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <!-- Need data-bs-dismiss to close--> 
+
+            </div>
+        </div>
+    </div>
+</div>

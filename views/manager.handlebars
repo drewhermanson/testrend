@@ -1,0 +1,94 @@
+<p>manager</p>
+
+<p user="{{id}}">welcome {{username}}</p>
+
+<!-- Button to create a writeup -->
+<a href="/writeup" class="btn btn-primary" id="#writeUpForm">
+    Create Write Up
+</a>
+
+<!-- Writeups that have not been acknowledged -->
+{{#if writeups}}
+{{#each writeups}}
+<p>{{this.user.username}} has not acknowledged the infraction {{this.type}} for {{this.reason}}</p>
+<!-- Button to view an unacknowledged writeup -->
+<button type="button" class="btn btn-primary open-modal-button" data-toggle="modal" data-target="#writeUpModal" data-index="{{@index}}">
+    View
+</button>
+<!-- Modals for each unacknowledged writeup -->
+<div class="modal fade" id="WriteUp{{@index}}" tabindex="-1" role="dialog" aria-labelledby="writeUpModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title" id="writeUpModalLabel">Write Up</h5>
+                    <br>
+                    <h6 class="modal-title" id="manager">Manager: {{manager}}</h6>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="warningInfo">Infraction:</label>
+                            <p>{{this.type}} for {{this.reason}} 
+                                <br>"{{this.content}}"</p>
+                    </div>
+                    {{#each comments}}
+                    <div class="form-group">
+                        <label for="commentsTextarea">Commented by - {{this.user.username}}:</label>
+                        <p>{{this.content}}</p>
+                    </div>
+                    {{/each}}
+                    <div class="form-group">
+                        <label for="textInput">Text Input:</label>
+                        <input type="text" class="form-control" id="textInput" writeup="{{this.comments.[0].writeup_id}}">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="commentsbtn">Add Comments</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{/if}}
+
+
+<script>
+    document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("open-modal-button")) {
+        var index = event.target.getAttribute("data-index");
+        var modalId = "WriteUp" + index;
+        
+        $('#' + modalId).modal('show');      
+    }
+    
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+        const commentButtons = document.querySelectorAll(".modal-footer #commentsbtn");
+        commentButtons.forEach(function(button) {
+            button.addEventListener("click", function(event) {
+                const modalId = this.closest(".modal").id;
+                const textInput = document.querySelector(`#${modalId} #textInput`);
+                const content = textInput.value;
+                const writeup_id = parseInt(modalId.split("WriteUp")[1]) + 1;
+                const user_id = parseInt(document.querySelector("p[user]").getAttribute("user"));
+
+                console.log(content, writeup_id, user_id);
+                
+                if (content && user_id && writeup_id) {   
+                const response = fetch('/api/users/comment', {         
+                method: 'POST',
+                body: JSON.stringify({ content, user_id, writeup_id }),
+                headers: { 'Content-Type': 'application/json' },
+                });
+                window.location.replace('/dashboard');
+            }
+        });
+    });
+}); 
+</script>
+

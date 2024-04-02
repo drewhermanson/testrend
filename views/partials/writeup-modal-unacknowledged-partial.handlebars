@@ -1,0 +1,51 @@
+<h5>"{{reason}}" on {{format_date date_created}} from {{manager}}</h5>
+
+<button type="button" class="btn btn-primary open-modal-button" data-toggle="modal" data-target="#" data-index="{{@index}}">
+    View
+</button>
+<!-- Modals for each unacknowledged writeup -->
+<div class="modal fade" id="WriteUp{{@index}}" tabindex="-1" role="dialog" aria-labelledby="writeUpModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header"> <!-- Modal-->
+                <div>
+                    <h5 class="modal-title" id="writeUpModalLabel">{{type}}: "{{reason}}" on {{format_date date_created}}</h5>
+                    <br>
+                    <p>This is a <b>{{type}}</b> for the event that happened on: {{format_date date_created}}</p>
+                    <p><b>Infraction</b>: {{reason}}</p>
+                    <p><b>Created by</b>: {{manager}}</p>
+                    <p><b>Description of the event</b>: "{{content}}"</p>
+                    <p>Consequences of repeat violation are further disciplinary action up to and including termination.</p>
+
+                    <!-- Can add from the writeupEMP.handlebars --> 
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    {{#each comments}} <!-- When we use each, we have now changed what .this refers to. It changes from writeup to comment writeups.comment-->
+                    <div class="form-group">
+                        <label for="commentsTextarea">Commented by - {{this.user.username}}:</label>
+                        <p>"{{this.content}}"</p>
+                    </div>
+                    {{/each}}
+                    <!-- Delete if they have acknowledged -->
+                    <div class="form-group">
+                        <label for="textInput">Questions/Comments/Concerns</label>
+                        <input type="text" class="form-control" id="textInput" writeup="{{this.comments.[0].writeup_id}}"> <!-- Writeups.comments.[0] Call the position in the array if we ever work with comments-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"> <!-- Houses the button -->
+                <!-- Can add the legalese acknowledge text into the footer -->
+                <p>I am acknowledging that this write up has been presented to me and all of the information on this document will be put into my personal file including my comments and acknowledgement.</p>
+                <br>
+                <!-- Can probably add some changes based on whether acknowledged -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <!-- Need data-bs-dismiss to close--> 
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="commentsbtn">Add Comments</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="acknowldgementbtn">Acknowledge</button> <!-- Will need an event listener to submit to a PUT route-->
+            </div>
+        </div>
+    </div>
+</div>

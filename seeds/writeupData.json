@@ -1,0 +1,40 @@
+[
+	{
+		"manager": "jeff",
+		"type": "Warning",
+		"reason": "Tardiness",
+		"content": "Employee entered thirty minutes late to their shift",
+		"user_id": 1,
+		"acknowledged": false
+	}, {
+		"manager": "jeff",
+		"type": "Warning",
+		"reason": "Incorrect uniform",
+		"content": "Wore a uniform from another company",
+		"user_id": 2,
+		"acknowledged": false
+	}, {
+		"manager": "jeff",
+		"type": "Writeup",
+		"reason": "Theft",
+		"content": "Camera displays employee not placing the order through the register",
+		"user_id": 3,
+		"acknowledged": true
+	},
+	{
+		"manager": "jeff",
+		"type": "Warning",
+		"reason": "Attendance",
+		"content": "Did not come in for their shift",
+		"user_id": 3,
+		"acknowledged": false
+	},
+	{
+		"manager": "jeff",
+		"type": "Warning",
+		"reason": "Vulgar language",
+		"content": "Cursed at a guest member",
+		"user_id": 2,
+		"acknowledged": false
+	}
+]

@@ -1,0 +1,22 @@
+[
+	{
+		"content": "I had a family emergency",
+		"user_id": 1,
+		"writeup_id": 1
+	},
+	{
+		"content": "I accidentally spilled coffee on my uniform",
+		"user_id": 2,
+		"writeup_id": 2
+	},
+	{
+		"content": "I didn't steal anything!",
+		"user_id": 3,
+		"writeup_id": 3
+	},
+	{
+		"content": "We have video proof",
+		"user_id": 4,
+		"writeup_id": 3
+	}
+]

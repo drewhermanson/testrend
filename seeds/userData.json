@@ -1,0 +1,26 @@
+[
+	{
+		"email": "bob@gmail.com",
+		"username": "bobross",
+		"password": "test1234",
+		"position": 1
+	},
+	{
+		"email": "jane@gmail.com",
+		"username": "janedoe",
+		"password": "test2345",
+		"position": 1
+	},
+	{
+		"email": "john@gmail.com",
+		"username": "johnsmith",
+		"password": "test3456",
+		"position": 1
+	},
+	{
+		"email": "jefe@gmail.com",
+		"username": "jeff",
+		"password": "test4568",	
+		"position": 2
+	}
+]
