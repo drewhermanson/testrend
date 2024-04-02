@@ -21,18 +21,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div>
-                    <h5 class="modal-title" id="writeUpModalLabel">Write Up</h5>
-                    <br>
-                    <h6 class="modal-title" id="manager">Manager: {{manager}}</h6>
+                    <h5 class="modal-title" id="writeUpModalLabel">Infraction</h5>
+                    <label for="warningInfo"></label>
+                        <p>This is a <b>{{this.type}}</b> for the event that happened on: {{format_date this.date_created}}</p>
+                        <p><b>Infraction</b>: {{this.reason}}</p>
+                        <p><b>Created by</b>: {{manager}}</p>
+                        <p><b>Description of the event</b>: "{{content}}"</p>
                 </div>
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
-                        <label for="warningInfo">Infraction:</label>
-                            <p>{{this.type}} for {{this.reason}} 
-                                <br>"{{this.content}}"</p>
-                    </div>
                     {{#each comments}}
                     <div class="form-group">
                         <label for="commentsTextarea">Commented by - {{this.user.username}}:</label>
@@ -40,7 +38,7 @@
                     </div>
                     {{/each}}
                     <div class="form-group">
-                        <label for="textInput">Text Input:</label>
+                        <label for="textInput">Questions/Comments/Concerns:</label>
                         <input type="text" class="form-control" id="textInput" writeup="{{this.comments.[0].writeup_id}}">
                     </div>
                 </form>
